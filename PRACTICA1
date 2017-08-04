@@ -1,0 +1,56 @@
+3+4
+help(sum)
+sum(1:5)
+y<-3
+x<-8
+x+y
+z=x+y
+rm(x)
+rm(x,y,z)
+a<-"nombre" #define una variable categorica de nombre a
+class(a) #la funcion class sirve para conocer que tipo de variable objeto es
+class(x)
+a<-4
+b<-3
+suma<-a+b
+a>=b  #a es mayor igual que a
+a==b
+a==4
+a!=b
+a<b
+## concepto de funcion
+x<-abs(-2.5) ##abs es la funcion del valor absoluto 
+##para asignar vlores a variables en r se usa una<-
+x<-"hola" #variable de tipo caracter 
+z<- 6 #el igual solo funciona en una sola direccion 
+# los objetos o variables que se utilizan son de caracter o numerico
+ciudad <-"Toluca" #una entrada
+nombres <-c("Carlos","Rodrigo","Miguel","Samuel")#caracter 
+edad<-c(28,17,49,31) #numerico y cuatro entradas
+#se utiliza la funcion class para preguntarle a r que tipo de variables son
+class(nombres) #tipo de variable
+class(edad)
+
+base1<-data.frame(nombres,edad) #ver lista de variables de base 1
+View(base1)
+ls(base1)#ver lista de variables de base 1
+base1$edad#para conocer los datos de la variable 
+#edad de la base 1 
+
+#Ejercicio: crear una variable de nombre sexo con 4 entradas donde hombre es 1 y mujer es
+#el valor 2, la primera entrada es mujer y las otras 3 son hombres 
+##despues de crear esta variable generen una nueva base de nombre base 2 con 3 variables
+#nombres, edad y sexo
+sexo <- c(2,1,1,1)
+base2<-data.frame(nombres,edad,sexo)
+table(base2$sexo)
+table(base2$edad)
+View(base2)
+
+
+palumnos<-c(40,120,60,80) ##alumnos facultad economia 
+etiq <- c("act","eco","ri","nib")
+pie(palumnos,etiq,main="Gráfica de pie de la facultad de economía",
+    sub="Fuente:facultad de economía",
+    col=c("blue","red","pink","yellow",radius=1.0,clockwise=TRUE,lty=18))
+
