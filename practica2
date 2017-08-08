@@ -1,0 +1,60 @@
+#Crear tres variables de 4 entradas. Las variables de nombre:
+#facultad (economia,ingenieria,arq y derecho)
+#Licenciatura(actuaria,ing civil,arq,derecho)
+#calf. alumnos(6,4,10,8)
+#verificar cn e que tipo de variables son 
+facultad<-c ("economía","ingeniería","arquitectura","derecho")
+licenciatura<-c("actuaria","ing civil","arquitectura","derecho")
+calificacion<-c(6,4,10,8)
+class(facultad)
+class(licenciatura)
+class(calificacion)
+rm(facultad)
+pie(calificacion,main= "Gráfica de pie de calificacíon de alumnos", sub = "Fuente: Facultad de economía", col = c("blue", "red", "pink", "yellow"), radius = 1.2, clockwise = FALSE, lty=2)
+                                                                                                               
+#vectores
+a<-2+3 #vector longitud 1
+b<-c(3,4)- c(6,1) #esta diferencia genera un vector dos entradas 
+c<-c(4,5,6)*c(5,2,1) #vector 3 entradas por otro de 3 entrada 
+d<-c(1:50,7,99)
+length(d)
+length(c)
+#operaciones logicas con vectores
+d>=45
+d==50
+d!=35
+
+#sucesiones con operadores y funciones
+z<-seq(0,30,3)
+z
+seq(from=0,to,by=3)
+seq(by=3,to=30,from=0)
+
+seq(from=1,to=30,by=3)
+seq(10)
+
+seq(2,10)
+seq(from=3,to=10) # en este caso el by automaticamente es 1
+
+secuencia<- seq(1,10,by=1)
+secuencia1<-seq(0,100,by=10)
+sec2<- seq(300,130,by=-3)
+# Funcion Muestras
+ingresoI<- sample(20000:50000,100)
+(ingreso<- sample(20000:50000,100))
+ingreso>=40000
+#despliega automaticamente el valor del objeto 
+aleatorios<-sample(1:10,20,replace=TRUE)
+(aleatorios<-sample(1:10,20,replace=T))
+#para seleccionar la posicion de un vector
+ingreso[50]
+ingreso[73]
+ingreso[c(30,50,70)]
+ingreso[seq(20,50,10)]
+ingreso[30:43]
+ingreso[ingreso>40000]
+ingreso[ingreso<22000]
+ingreso[ingreso>20000 & ingreso<30000]
+#3 repetir 
+ss<-c(5,-7,9)
+rr<-rep(ss,times=5)
