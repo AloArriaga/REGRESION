@@ -1,0 +1,45 @@
+
+##EJERCICIO
+##Plantear un mrm de minimo 4 variables independientes,a este modelo que planteen van a realizar:
+##1) analizar la anova para conocer la bondad de ajuste 
+##2) a través de los coeficientes detectar las variables independientes no significativas
+##3) analizar la r2 para conocer la variabilidad del modelo
+##4) en dado caso de que haya alguna independencia no significativa eliminarla y diagnosticar el modelo a través de las pruebas para los supuestos
+
+B1<-c(4330,5500,5550,4700,5200,5500,4700,5500,5800,5000)
+B2<-c(2,3,4,3,4,4,4,5,5,5)
+B3<-c(190,219,249,249,250,340,289,395,439,525)
+B4<-c(4340,5540,5540,4740,5240,5550,4750,5550,5850,5050)
+B5<-c(3,4,5,4,3,3,4,6,5,6)
+Bs<-data.frame(B1,B2,B3,B4,B5)
+View(Bs)
+cor(Bs,use="everything",method="pearson")
+modmo<-lm(B1~B2+B3+B4+B5)
+summary(modmo)
+
+#Se revisa la r2 ajustada, debido a que es un mrm y la r2 ajustada tiene un valor de .9982 lo que implica que 
+#la recta de regresión explica en 99 por ciento la variabilidad del modelo después de que tengamos una r2 ajustada
+#aceptable, se analiza el estadistico F para saber la bondad de ajuste y la calidad del modelo que estamos 
+# aplicando
+anova(modmo)
+#una vez que aplicamos anova se va a revisar los valores del estadístico F y los p-value con la finalidad de 
+#conocer la bondad de ajuste del mrm, en este caso se observa que en la var independiente calidad se tiene un
+#estadístico F de 1882.89, lo que es un buen estadístico F debido a que se esperan valores mayores a 1, para los 
+#p-value se espera un valor <.05 , en este caso la primer var indep cumple con un estadístico F mayor a 1 y un
+#p-value<.5 con lo que podriamos decir que la var calidad es significativa en nuestro modelo
+#para el analisis de la variable B5, el estadistico F de 1.4 y un p-value de .28, en este caso podríamos concluir
+# que esta variable no resulta significariva para nuestro modelo, debido a que el estadístico F es apenas mayor a 1
+#y el p value es >.05
+Bs$fitted.modmo<-fitted(modmo)
+Bs$residuals.modmo<-fitted(modmo) 
+Bs$rstudent.modmo<-fitted(modmo)
+x11() # Para abrir una interfaz grafica 
+qqnorm(Bs$rstudent.modmo, main = "Normal (0,1)")#Se obtienen graficos de dipersion con la normal 0,1
+qqline(Bs$rstudent.modmo)
+shapiro.test(Bs$rstudent.modmo)
+### en esta prueba esperamos un p-value mayor a .05 y en este caso se obtiene un p-value mayor a .05 por lo que
+### podriamos decir que se acepta el supuesto de normalidad
+install.packages("lmtest")
+require(lmtest)
+bptest(modmo)
+dwtest(modmo,alternative="two.sided")
