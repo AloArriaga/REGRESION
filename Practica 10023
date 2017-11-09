@@ -1,0 +1,35 @@
+##swiss
+##medicion estandarizada de la fecundidad e indicadores socioeconomicos para cada una de las 47 provincias 
+##francesas hablantes de Suiza alrededor de 1888
+require(stats)
+base<-data.frame(swiss)
+
+##analisis exploratorio (debemos argumentar por que elegimos las variables)
+names(base)
+pairs(base)#lo que veo en la grafica pairs es que mortality se escoge como var indep
+cor(base)
+
+
+##modelo propuesto anteriormente
+nulo<- lm(Fertility~ 1, data=base)##quiero comparar el modelo nulo con el completo var dep con una constante, de lado izq van a estar las indep "y",se crea para saber que las variables si tinen un poco de relacion con la variable dependiente
+summary(nulo)
+completo<-lm(Fertility~., data=base)## lm(fertility~ Infant.mortality + education + examination + agriculture + catholic) lo que hace es plantear todas las var indep con base en la base base (para eso sirve el punto (.))
+step(nulo, scope=list(lower=nulo,upper=completo),direction="forward")# Copara los modelos, evaluando la variabrle dependiente con cada una de las variables independientes, va desde el nulo que contiene la variable dependiente hasta terminar de relacionarla con todas las var indep. 
+summary(completo)
+help(step)
+
+
+require (stats)
+base3<-data.frame(attitude)
+names(base3)
+pairs(base3)#lo que veo en la grafica pairs es que mortality se escoge como var indep
+cor(base3)
+nula<-lm(rating~ 1, data=base3)##quiero comparar el modelo nulo con el completo var dep con una constante, de lado izq van a estar las indep "y",se crea para saber que las variables si tinen un poco de relacion con la variable dependiente
+summary(nula)
+completa<-lm(rating~., data=base3)## lm(fertility~ Infant.mortality + education + examination + agriculture + catholic) lo que hace es plantear todas las var indep con base en la base base (para eso sirve el punto (.))
+step(nula, scope=list(lower=nula,upper=completa),direction="forward")# Copara los modelos, evaluando la variabrle dependiente con cada una de las variables independientes, va desde el nulo que contiene la variable dependiente hasta terminar de relacionarla con todas las var indep. 
+summary(completa)
+help(step)
+ ## Encontramos que el mejor modelo en el analisis no es el completo sino rating ~ complaints + learning ya que nos arroja un AIC de 118 menor a todos los modelos evaluados y comparados entre si
+ ## seguido por rating relqacionado unicamente con complaints con un AIC DE 118.63  y segun Imelda que relaciono privileges como var dependiente obtuvo un minimo AIC  de 141, lo cual nos hace ver 
+ ## que sin duda alguna la relacion de rating es mejor por la correlacion de la var.....
