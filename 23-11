@@ -1,0 +1,42 @@
+##LIMITES PARA PREDECIR
+
+limestudio<seq(min(Estudio$Zinc),max(Estudio$Zinc),length=9)
+limestudio<-data.frame(limestudio)
+limestudio
+limestud<-predict.lm(allreg,limestudio,interval="prediction",se.fit=TRUE,data=Estudio)##esta prediccion la mandamos llamar con head
+head(limestud$fit)##head(sacar,extraer, o plantear los limites de mi estudio)ie:te generan los limites
+
+##para dibujar los limites
+matplot(limestudio,limestud$fit,type="l")## "l" de linea
+
+##predicciones
+
+##newdata= data.frame()
+#names(estudio)
+
+predict(pallreg,data.frame(Zinc=10000,Potasio=40,interval="predict"))
+
+nocajas<-c(10,15,10,20,25,18,12,14,16,22,24,17,13,30,24)
+length(nocajas)
+distancia<-c(30,25,40,18,22,31,26,34,29,37,20,25,27,23,33)
+tiempo<-c(24,27,29,31,25,33,26,28,31,39,33,30,25,42,40)
+estudio<-data.frame(nocajas,distancia,tiempo)
+pairs(estudio)
+cor(estudio)
+regnull<-lm(nocajas~1,data=estudio)
+
+#no pasa normalidad por lo que hay que revisar los outlier
+install-packages("car")
+require(car)
+outlierTest(allreg,cutoff=.05,n.max=5,order=T)
+influencePlot(allreg,id.n=5)
+##la observacion 5 indica con problemas ahora para confirmar los casos que tienen implicaciones 
+##en el modelo se aplica el grafico de distancias de cook
+cmod2<cooks.distance(allreg)
+etique<-rownames(ejer)
+install.packages("faraway")
+require(faraway)
+halfnorm(cmod2,labs=etique, ylab="dist cook")
+#aquí esperariamos un dato mayor a 1 para comprobar que si es atipico o el numero mas alto es el 5 por lo que ahora
+##una solución es eliminarlo y volver aplicar shapiro test
+## tarea:quitar la observacion 5 puede ser con corchetes(la primer entrada es de renglones y la segunda de columnas)
